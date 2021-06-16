@@ -1,4 +1,16 @@
-exports.helloHttp = (req, res) => {
-  let message = req.query.message || req.body.message || 'Hello World http !!';
-  res.status(200).send(message);
+/**
+ * Background Cloud Function to be triggered by Pub/Sub.
+ * This function is exported by index.js, and executed when
+ * the trigger topic receives a message.
+ * from https://cloud.google.com/functions/docs/calling/pubsub#functions_calling_pubsub-nodejs
+ *
+ * @param {object} message The Pub/Sub message.
+ * @param {object} context The event metadata.
+ */
+ exports.helloPubSub = (message, context) => {
+  const name = message.data
+    ? Buffer.from(message.data, 'base64').toString()
+    : 'empty';
+
+  console.log(`Hello, message was: ${name}!`);
 };
