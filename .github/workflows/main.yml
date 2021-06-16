@@ -22,14 +22,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: google-github-actions/setup-gcloud@master
-        with:
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          project_id: ${{ secrets.GKE_PROJECT }}
-          export_default_credentials: true
       - uses: actions/checkout@v2
       - id: Deploy
         uses: google-github-actions/deploy-cloud-functions@main
         with:
-          name: my-function
+          credentials: ${{ secrets.GCP_SA_KEY }}
+          project_id: ${{ secrets.GKE_PROJECT }}
+          name: helloHttp
           runtime: nodejs10
