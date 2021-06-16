@@ -35,6 +35,6 @@ jobs:
           name: helloPubSub
           runtime: nodejs10
           event_trigger_type: google.pubsub.topic.publish
-          event_trigger_resource: projects/$PROJECT_ID/topics/$TOPIC
+          event_trigger_resource: projects/${{ PROJECT_ID }}/topics/${{ TOPIC }}
           event_trigger_service: pubsub.googleapis.com
   
